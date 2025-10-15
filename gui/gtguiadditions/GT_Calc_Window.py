@@ -6,7 +6,7 @@ from PyQt5.QtCore import QSize
 from sage.all import Graph
 
 
-class GTImageWindow(QWidget):
+class GTImageWindow(QWidget): #window set up for the picture of the graph
     def __init__(self, image_path):
         super().__init__()
         self.setWindowTitle("Graph")
@@ -28,32 +28,29 @@ class GTImageWindow(QWidget):
 class GT_Calc_Window(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
-
+        
         self.textlayout = QHBoxLayout()
-        self.setWindowTitle("Testing")
-        self.setGeometry(100, 100, 900, 700)  # x, y, width, height
-
-        self.vert_label = QLabel("Input Vertice Names:", self) #create label for vertice inputs
+        #vertex input instructions
+        self.vert_label = QLabel("Input Vertice Names:", self) 
         self.vert_label.setGeometry(52,30,125,40)
         self.vert_sublabel = QLabel ("(seperated by commas)", self)
         self.vert_sublabel.setGeometry(45,55,160,20)
         
-
+        #vertex input textbox
         self.vert_textbox_layout = QHBoxLayout()
         self.vert_textbox = QLineEdit(self)
         self.vert_textbox.setPlaceholderText("ex: 1, 2, 3, 4")
         self.vert_textbox.setGeometry(240,30,250,40)
         self.vert_textbox_layout.addWidget(self.vert_textbox)
         
-
+        #edge input instructions
         self.edge_label = QLabel("Input Edges:", self) #create label for vertice inputs
         self.edge_label.setGeometry(75,120,125,40)
         self.edge_sublabel = QLabel ("(ordered pairs seperated by commas)", self)
         self.edge_sublabel.setGeometry(35,145,160,40)
         self.edge_sublabel.setWordWrap(True)
         
-        
-
+        #edge input textbox
         self.edge_textbox_layout = QHBoxLayout()
         self.edge_textbox = QLineEdit(self)
         self.edge_textbox.setPlaceholderText("ex: (1,2), (2,3), (1,4)")
@@ -118,12 +115,12 @@ class GT_Calc_Window(QWidget):
     def on_display_button(self): #creates pop up window of graph picture
          # Get vertices
         vert_text = self.vert_textbox.text()
-        vertices = [v.strip() for v in vert_text.split(',') if v.strip()]
+        vertices = [v.strip() for v in vert_text.split(',') if v.strip()] #takes from the vertex textbox input and puts it into correct format for sage
 
         # Get edges
         edge_text = self.edge_textbox.text()
         edge_pairs = []
-        for e in edge_text.split('),'):
+        for e in edge_text.split('),'): #takes from the edge textbox input and puts it into correct format for sage
             e = e.replace('(', '').replace(')', '').strip()
             if e:
                 parts = e.split(',')
@@ -144,10 +141,10 @@ class GT_Calc_Window(QWidget):
 
     def on_degree_button(self):
         vert_text = self.vert_textbox.text()
-        vertices = [v.strip() for v in vert_text.split(',') if v.strip()]
+        vertices = [v.strip() for v in vert_text.split(',') if v.strip()]#takes from the vertex textbox input and puts it into correct format for sage
         edge_text = self.edge_textbox.text()
         edge_pairs = []
-        for e in edge_text.split('),'):
+        for e in edge_text.split('),'):#takes from the edge textbox input and puts it into correct format for sage
             e = e.replace('(', '').replace(')', '').strip()
             if e:
                 parts = e.split(',')
@@ -168,10 +165,10 @@ class GT_Calc_Window(QWidget):
    
     def on_planar_button(self):
         vert_text = self.vert_textbox.text()
-        vertices = [v.strip() for v in vert_text.split(',') if v.strip()]
+        vertices = [v.strip() for v in vert_text.split(',') if v.strip()]#takes from the vertex textbox input and puts it into correct format for sage
         edge_text = self.edge_textbox.text()
         edge_pairs = []
-        for e in edge_text.split('),'):
+        for e in edge_text.split('),'):#takes from the edge textbox input and puts it into correct format for sage
             e = e.replace('(', '').replace(')', '').strip()
             if e:
                 parts = e.split(',')
@@ -193,10 +190,10 @@ class GT_Calc_Window(QWidget):
 
     def on_eulerian_button(self):
         vert_text = self.vert_textbox.text()
-        vertices = [v.strip() for v in vert_text.split(',') if v.strip()]
+        vertices = [v.strip() for v in vert_text.split(',') if v.strip()]#takes from the vertex textbox input and puts it into correct format for sage
         edge_text = self.edge_textbox.text()
         edge_pairs = []
-        for e in edge_text.split('),'):
+        for e in edge_text.split('),'):#takes from the edge textbox input and puts it into correct format for sage
             e = e.replace('(', '').replace(')', '').strip()
             if e:
                 parts = e.split(',')
@@ -217,10 +214,10 @@ class GT_Calc_Window(QWidget):
 
     def on_hamiltonian_button(self):
         vert_text = self.vert_textbox.text()
-        vertices = [v.strip() for v in vert_text.split(',') if v.strip()]
+        vertices = [v.strip() for v in vert_text.split(',') if v.strip()]#takes from the vertex textbox input and puts it into correct format for sage
         edge_text = self.edge_textbox.text()
         edge_pairs = []
-        for e in edge_text.split('),'):
+        for e in edge_text.split('),'):#takes from the edge textbox input and puts it into correct format for sage
             e = e.replace('(', '').replace(')', '').strip()
             if e:
                 parts = e.split(',')
@@ -243,9 +240,9 @@ class GT_Calc_Window(QWidget):
     def on_density_button(self):
         try:
             vert_text = self.vert_textbox.text()
-            vertices = [v.strip() for v in vert_text.split(',') if v.strip()]
+            vertices = [v.strip() for v in vert_text.split(',') if v.strip()]#takes from the vertex textbox input and puts it into correct format for sage
 
-            edge_text = self.edge_textbox.text()
+            edge_text = self.edge_textbox.text()#takes from the edge textbox input and puts it into correct format for sage
             edge_pairs = []
             for e in edge_text.split('),'):
                 e = e.replace('(', '').replace(')', '').strip()
@@ -262,11 +259,11 @@ class GT_Calc_Window(QWidget):
             G.add_vertices(vertices)
             G.add_edges(edge_pairs)
 
-        # Guard against too few vertices (density undefined / division by zero)
+        # protects against too few vertices (density undefined / division by zero)
             if len(G.vertices()) < 2:
                 self.densitylabel.setText("N/A")
             else:
-            # Convert to float to avoid strange Sage types when formatting
+            # Convert to float to display as a percentage to two decimal places
                 density = float(G.density())
                 density_perc = density * 100.0
                 self.densitylabel.setText(f"{density_perc:.2f}%")
@@ -274,7 +271,7 @@ class GT_Calc_Window(QWidget):
             self.densitylabel.setGeometry(555, 275, 150, 50)
             self.densitylabel.show()
 
-        except Exception as exc:
+        except Exception as exc: #stops abort if cannot calculate density with given inputs
         # Show a message and print full traceback to console for debugging
             QMessageBox.critical(self, "Error", f"Error computing density:\n{exc}")
             import traceback
