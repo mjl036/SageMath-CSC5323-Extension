@@ -20,8 +20,8 @@ def generateQuestion():
         A = filler.randomSet()
         partition_sets = filler.randomPartition(A, k=len(unique_placeholders)-1)
         sets_dict[unique_placeholders[0]] = str(A)
-        for i, part_set in enumerate(partition_sets):
-            sets_dict[unique_placeholders[i+1]] = str(part_set)
+        for i, partSet in enumerate(partition_sets):
+            sets_dict[unique_placeholders[i+1]] = str(partSet)
     else:
         # Generate sets based on subset relations or randomly
         A = filler.randomSet()
